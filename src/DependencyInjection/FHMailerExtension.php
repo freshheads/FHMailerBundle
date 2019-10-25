@@ -6,6 +6,7 @@ namespace FH\MailerBundle\DependencyInjection;
 use FH\MailerBundle\Email\Composer\ComposerIdentifiers;
 use FH\MailerBundle\Email\Composer\EmailComposer;
 use FH\MailerBundle\Email\Composer\TemplatedEmailComposer;
+use FH\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,30 +22,30 @@ final class FHMailerExtension extends ConfigurableExtension
         (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')))
             ->load('message_composer.yaml');
 
-        foreach ($configs[ComposerIdentifiers::TEMPLATED_EMAIL] as $name => $config) {
-            $this->registerTemplatedEmailComposer($container, $name, $config);
+        foreach ($configs[ComposerIdentifiers::TEMPLATED_EMAIL] as $name => $messageOptions) {
+            $this->registerTemplatedEmailComposer($container, $name, $messageOptions);
         }
     }
 
-    private function registerTemplatedEmailComposer(ContainerInterface $container, string $composerName, array $configs): string
+    private function registerTemplatedEmailComposer(ContainerInterface $container, string $composerName, array $messageOptions): string
     {
-        $emailComposerId = $this->registerEmailComposer($container, $composerName, $configs);
+        $emailComposerId = $this->registerEmailComposer($container, $composerName, $messageOptions);
         $composerId = $this->createComposerId($composerName, ComposerIdentifiers::TEMPLATED_EMAIL);
 
-        return $this->registerComposer($container, $configs, TemplatedEmailComposer::class, $composerId, $emailComposerId);
+        return $this->registerComposer($container, $messageOptions, TemplatedEmailComposer::class, $composerId, $emailComposerId);
     }
 
-    private function registerEmailComposer(ContainerInterface $container, string $composerName, array $configs): string
+    private function registerEmailComposer(ContainerInterface $container, string $composerName, array $messageOptions): string
     {
         $composerId = $this->createComposerId($composerName, ComposerIdentifiers::EMAIL);
 
-        return $this->registerComposer($container, $configs, EmailComposer::class, $composerId);
+        return $this->registerComposer($container, $messageOptions, EmailComposer::class, $composerId);
     }
 
-    private function registerComposer(ContainerInterface $container, array $configs, string $composerClass, string $composerId, string $chainedComposerId = null): string
+    private function registerComposer(ContainerInterface $container, array $messageOptions, string $composerClass, string $composerId, string $chainedComposerId = null): string
     {
         $composerDefinition = new ChildDefinition($composerClass);
-        $composerDefinition->setArgument('$configs', $configs);
+        $composerDefinition->setArgument('$messageOptions', $messageOptions);
 
         if (is_string($chainedComposerId)) {
             $composerDefinition->setArgument('$composer', new Reference($chainedComposerId));

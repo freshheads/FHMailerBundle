@@ -71,6 +71,7 @@ final class Configuration implements ConfigurationInterface
                 ->end();
         } else {
             $node
+                ->canBeDisabled()
                 ->children()
                     ->scalarNode('address')->isRequired()->end()
                     ->scalarNode('name')->cannotBeEmpty()->end()

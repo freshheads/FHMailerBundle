@@ -3,18 +3,19 @@ declare(strict_types=1);
 
 namespace FH\MailerBundle\Email\Composer;
 
+use FH\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
 
 final class EmailComposer implements ComposerInterface
 {
-    private $configs;
+    private $messageOptions;
     private $composer;
 
-    public function __construct(array $configs, ?ComposerInterface $composer)
+    public function __construct(array $messageOptions, ?ComposerInterface $composer)
     {
-        $this->configs = $configs;
+        $this->messageOptions = MessageOptions::fromArray($messageOptions);
         $this->composer = $composer;
     }
 
@@ -41,41 +42,39 @@ final class EmailComposer implements ComposerInterface
 
     private function applySubject(Email $message): void
     {
-        if (!is_string($this->configs['subject'])) {
+        if (!$this->messageOptions->hasSubject()) {
             return;
         }
 
-        $message->subject($this->configs['subject']);
+        $message->subject($this->messageOptions->getSubject());
     }
 
     private function applyParticipants(Email $message): void
     {
-        $participants = $this->configs['participants'];
+        $participants = $this->messageOptions->getParticipants();
 
-        dd($participants);
-
-        if (is_string($participants['sender'])) {
-            $message->sender($participants['sender']);
+        if ($participants->hasSender()) {
+            $message->sender($participants->getSender());
         }
 
-        if (is_string($participants['from'])) {
-            $message->from($participants['from']);
+        if ($participants->hasFrom()) {
+            $message->from($participants->getFrom());
         }
 
-        if (is_string($participants['reply_to'])) {
-            $message->replyTo($participants['reply_to']);
+        if ($participants->hasReplyTo()) {
+            $message->replyTo($participants->getReplyTo());
         }
 
-        if (is_string($participants['to'])) {
-            $message->to($participants['to']);
+        if ($participants->hasTo()) {
+            $message->to($participants->getTo());
         }
 
-        if (is_string($participants['cc'])) {
+        if ($participants->hasCc()) {
             $message->cc($participants['cc']);
         }
 
-        if (is_string($participants['bcc'])) {
-            $message->bcc($participants['bcc']);
+        if ($participants->hasBcc()) {
+            $message->bcc($participants->getBcc());
         }
     }
 }

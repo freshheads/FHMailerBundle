@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace FH\MailerBundle\Email\Composer;
 
+use FH\MailerBundle\Email\MessageOptions;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\RawMessage;
@@ -10,13 +11,13 @@ use Twig\Environment;
 
 final class TemplatedEmailComposer implements ComposerInterface
 {
-    private $configs;
+    private $messageOptions;
     private $composer;
     private $twig;
 
-    public function __construct(array $configs, ?ComposerInterface $composer, Environment $twig)
+    public function __construct(array $messageOptions, ?ComposerInterface $composer, Environment $twig)
     {
-        $this->configs = $configs;
+        $this->messageOptions = MessageOptions::fromArray($messageOptions);
         $this->composer = $composer;
         $this->twig = $twig;
     }
@@ -44,13 +45,11 @@ final class TemplatedEmailComposer implements ComposerInterface
 
     private function applyHtmlTemplate(array $context, TemplatedEmail $message): void
     {
-        $htmlTemplate = $this->configs['html_template'];
-
-        if (!is_string($htmlTemplate)) {
+        if (!$this->messageOptions->hasHtmlTemplate()) {
             return;
         }
 
-        $template = $this->twig->load($htmlTemplate);
+        $template = $this->twig->load($this->messageOptions->getHtmlTemplate());
 
         if ($template->hasBlock('subject')) {
             $subject = $template->renderBlock('subject', $context);
@@ -70,12 +69,10 @@ final class TemplatedEmailComposer implements ComposerInterface
 
     private function applyTextTemplate(TemplatedEmail $message): void
     {
-        $textTemplate = $this->configs['text_template'];
-
-        if (!is_string($textTemplate)) {
+        if (!$this->messageOptions->hasTextTemplate()) {
             return;
         }
 
-        $message->textTemplate($textTemplate);
+        $message->textTemplate($this->messageOptions->getTextTemplate());
     }
 }
