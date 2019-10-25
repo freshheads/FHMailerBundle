@@ -60,9 +60,11 @@ final class Configuration implements ConfigurationInterface
             ->children()
             ->append($this->getEmailNode('sender'))
             ->append($this->getEmailNode('from'))
+            ->append($this->getEmailNode('to', true))
             ->append($this->getEmailNode('cc', true))
             ->append($this->getEmailNode('bcc', true))
-            ->append($this->getEmailNode('to', true))
+            ->scalarNode('subject')->defaultNull()->end()
+            ->scalarNode('htmlTemplate')->defaultNull()->end()
             ->end();
 
         return $node;
