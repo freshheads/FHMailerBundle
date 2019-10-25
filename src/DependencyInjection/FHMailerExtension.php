@@ -57,6 +57,6 @@ final class FHMailerExtension extends ConfigurableExtension
 
     private function createComposerId(string $composerId, string $composer): string
     {
-        return sprintf('fh_mailer.%s.%s', $composer, $composerId);
+        return "fh_mailer.$composer.$composerId";
     }
 }

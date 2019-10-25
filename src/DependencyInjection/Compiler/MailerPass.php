@@ -26,6 +26,6 @@ final class MailerPass implements CompilerPassInterface
 
     private function createComposerId(string $composerName): string
     {
-        return sprintf('fh_mailer.%s.%s', ComposerIdentifiers::TEMPLATED_EMAIL, $composerName);
+        return 'fh_mailer.' . ${ComposerIdentifiers::TEMPLATED_EMAIL} . ".$composerName";
     }
 }
