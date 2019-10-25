@@ -8,13 +8,15 @@ use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\RawMessage;
 use Twig\Environment;
 
-class TemplatedEmailComposer implements ComposerInterface
+final class TemplatedEmailComposer implements ComposerInterface
 {
+    private $configs;
     private $composer;
     private $twig;
 
-    public function __construct(?ComposerInterface $composer, Environment $twig)
+    public function __construct(array $configs, ?ComposerInterface $composer, Environment $twig)
     {
+        $this->configs = $configs;
         $this->composer = $composer;
         $this->twig = $twig;
     }
@@ -34,7 +36,21 @@ class TemplatedEmailComposer implements ComposerInterface
             throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class, get_class($message)));
         }
 
-        $template = $this->twig->load($context['template']);
+        $this->applyHtmlTemplate($context, $message);
+        $this->applyTextTemplate($message);
+
+        return $message;
+    }
+
+    private function applyHtmlTemplate(array $context, TemplatedEmail $message): void
+    {
+        $htmlTemplate = $this->configs['html_template'] ?? null;
+
+        if (!is_string($htmlTemplate)) {
+            return;
+        }
+
+        $template = $this->twig->load($htmlTemplate);
 
         if ($template->hasBlock('subject')) {
             $subject = $template->renderBlock('subject', $context);
@@ -50,7 +66,16 @@ class TemplatedEmailComposer implements ComposerInterface
         if ($template->hasBlock('body_html')) {
             $message->html($template->renderBlock('body_html', $context));
         }
+    }
 
-        return $message;
+    private function applyTextTemplate(TemplatedEmail $message): void
+    {
+        $textTemplate = $this->configs['text_template'] ?? null;
+
+        if (!is_string($textTemplate)) {
+            return;
+        }
+
+        $message->textTemplate($textTemplate);
     }
 }

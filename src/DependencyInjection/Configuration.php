@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace FH\MailerBundle\DependencyInjection;
 
+use FH\MailerBundle\Email\Composer\ComposerIdentifiers;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -10,8 +11,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     public const CONFIG_ID = 'fh_mailer';
-    public const SERVICE_TAG = 'freshheads.mailer';
-    public const COMPOSER_PREFIX = 'fh_mailer.composer_templated_email.';
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
@@ -27,18 +26,18 @@ final class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-            ->arrayNode('message_composers')
-                ->useAttributeAsKey('identifier')
-                    ->prototype('array')
-                        ->children()
-                            ->scalarNode('subject')->defaultNull()->end()
-                            ->scalarNode('htmlTemplate')->defaultNull()->end()
-                            ->scalarNode('textTemplate')->defaultNull()->end()
-                            ->append($this->getParticipantsNode())
+                ->arrayNode(ComposerIdentifiers::TEMPLATED_EMAIL)
+                    ->useAttributeAsKey('identifier')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('subject')->defaultNull()->end()
+                                ->scalarNode('html_template')->defaultNull()->end()
+                                ->scalarNode('text_template')->defaultNull()->end()
+                                ->append($this->getParticipantsNode())
+                            ->end()
                         ->end()
                     ->end()
-                ->end()
-            ->end();
+                ->end();
     }
 
     private function getParticipantsNode(): ArrayNodeDefinition
@@ -49,7 +48,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->append($this->getEmailNode('sender'))
                 ->append($this->getEmailNode('from'))
-                ->append($this->getEmailNode('replyTo'))
+                ->append($this->getEmailNode('reply_to'))
                 ->append($this->getEmailNode('to', true))
                 ->append($this->getEmailNode('cc', true))
                 ->append($this->getEmailNode('bcc', true))
