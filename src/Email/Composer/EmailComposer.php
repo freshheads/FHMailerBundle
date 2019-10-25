@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace FH\MailerBundle\Email\Composer;
 
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
@@ -51,27 +50,27 @@ final class EmailComposer implements ComposerInterface
 
     private function applyParticipants(Email $message): void
     {
-        if (array_key_exists('sender', $this->configs)) {
+        if (is_string($this->configs['sender'])) {
             $message->sender($this->configs['sender']);
         }
 
-        if (array_key_exists('from', $this->configs)) {
+        if (is_string($this->configs['from'])) {
             $message->from($this->configs['from']);
         }
 
-        if (array_key_exists('reply_to', $this->configs)) {
+        if (is_string($this->configs['reply_to'])) {
             $message->replyTo($this->configs['reply_to']);
         }
 
-        if (array_key_exists('to', $this->configs)) {
+        if (is_string($this->configs['to'])) {
             $message->to($this->configs['to']);
         }
 
-        if (array_key_exists('cc', $this->configs)) {
+        if (is_string($this->configs['cc'])) {
             $message->cc($this->configs['cc']);
         }
 
-        if (array_key_exists('bcc', $this->configs)) {
+        if (is_string($this->configs['bcc'])) {
             $message->bcc($this->configs['bcc']);
         }
     }
