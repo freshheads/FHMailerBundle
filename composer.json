@@ -9,7 +9,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "kevin Schuurmans",
+            "name": "Kevin Schuurmans",
             "email": "kevin.schuurmans@freshheads.com",
             "homepage": "https://freshheads.com",
             "role": "Developer"
@@ -61,6 +61,6 @@
         "test": "vendor/bin/phpunit --colors=always"
     },
     "support": {
-        "issues": "https://github.com/freshheads/FHCookieGuardBundle/issues"
+        "issues": "https://github.com/freshheads/FHMailerBundle/issues"
     }
 }
