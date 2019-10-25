@@ -18,12 +18,10 @@ final class FHMailerExtension extends ConfigurableExtension
 {
     public function loadInternal(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
-        $loader->load('message_composer.yaml');
+        (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')))
+            ->load('message_composer.yaml');
 
-        $composerConfigs = $configs[ComposerIdentifiers::TEMPLATED_EMAIL];
-
-        foreach ($composerConfigs as $name => $config) {
+        foreach ($configs[ComposerIdentifiers::TEMPLATED_EMAIL] as $name => $config) {
             $this->registerTemplatedEmailComposer($container, $name, $config);
         }
     }
@@ -46,7 +44,6 @@ final class FHMailerExtension extends ConfigurableExtension
     private function registerComposer(ContainerInterface $container, array $configs, string $composerClass, string $composerId, string $chainedComposerId = null): string
     {
         $composerDefinition = new ChildDefinition($composerClass);
-        $composerDefinition->setPublic(true);
         $composerDefinition->setArgument('$configs', $configs);
 
         if (is_string($chainedComposerId)) {

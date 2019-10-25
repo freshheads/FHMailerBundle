@@ -50,28 +50,32 @@ final class EmailComposer implements ComposerInterface
 
     private function applyParticipants(Email $message): void
     {
-        if (is_string($this->configs['sender'])) {
-            $message->sender($this->configs['sender']);
+        $participants = $this->configs['participants'];
+
+        dd($participants);
+
+        if (is_string($participants['sender'])) {
+            $message->sender($participants['sender']);
         }
 
-        if (is_string($this->configs['from'])) {
-            $message->from($this->configs['from']);
+        if (is_string($participants['from'])) {
+            $message->from($participants['from']);
         }
 
-        if (is_string($this->configs['reply_to'])) {
-            $message->replyTo($this->configs['reply_to']);
+        if (is_string($participants['reply_to'])) {
+            $message->replyTo($participants['reply_to']);
         }
 
-        if (is_string($this->configs['to'])) {
-            $message->to($this->configs['to']);
+        if (is_string($participants['to'])) {
+            $message->to($participants['to']);
         }
 
-        if (is_string($this->configs['cc'])) {
-            $message->cc($this->configs['cc']);
+        if (is_string($participants['cc'])) {
+            $message->cc($participants['cc']);
         }
 
-        if (is_string($this->configs['bcc'])) {
-            $message->bcc($this->configs['bcc']);
+        if (is_string($participants['bcc'])) {
+            $message->bcc($participants['bcc']);
         }
     }
 }
