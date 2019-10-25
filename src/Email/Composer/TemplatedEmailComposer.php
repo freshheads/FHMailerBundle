@@ -44,7 +44,7 @@ final class TemplatedEmailComposer implements ComposerInterface
 
     private function applyHtmlTemplate(array $context, TemplatedEmail $message): void
     {
-        $htmlTemplate = $this->configs['html_template'] ?? null;
+        $htmlTemplate = $this->configs['html_template'];
 
         if (!is_string($htmlTemplate)) {
             return;
@@ -70,7 +70,7 @@ final class TemplatedEmailComposer implements ComposerInterface
 
     private function applyTextTemplate(TemplatedEmail $message): void
     {
-        $textTemplate = $this->configs['text_template'] ?? null;
+        $textTemplate = $this->configs['text_template'];
 
         if (!is_string($textTemplate)) {
             return;
