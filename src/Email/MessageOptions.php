@@ -20,7 +20,7 @@ final class MessageOptions
         );
     }
 
-    private function __construct(?string $subject, ?string $htmlTemplate, ?string $textTemplate, Participants $participants)
+    public function __construct(?string $subject, ?string $htmlTemplate, ?string $textTemplate, Participants $participants)
     {
         $this->subject = $subject;
         $this->htmlTemplate = $htmlTemplate;

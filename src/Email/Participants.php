@@ -17,28 +17,22 @@ final class Participants
 
     public static function fromArray(array $participants): self
     {
+        $function = static function (array $address) {
+            return self::createAddress($address);
+        };
+
         return new self(
             $participants['sender'] ? self::createAddress($participants['sender']) : null,
-            array_map(static function (array $address) {
-                return self::createAddress($address);
-            }, $participants['from']),
-            array_map(static function (array $address) {
-                return self::createAddress($address);
-            }, $participants['reply_to']),
-            array_map(static function (array $address) {
-                return self::createAddress($address);
-            }, $participants['to']),
-            array_map(static function (array $address) {
-                return self::createAddress($address);
-            }, $participants['cc']),
-            array_map(static function (array $address) {
-                return self::createAddress($address);
-            }, $participants['bcc'])
+            array_map($function, $participants['from']),
+            array_map($function, $participants['reply_to']),
+            array_map($function, $participants['to']),
+            array_map($function, $participants['cc']),
+            array_map($function, $participants['bcc'])
         );
     }
 
-    private function __construct(
-        Address $sender,
+    public function __construct(
+        ?Address $sender,
         array $from = [],
         array $replyTo = [],
         array $to = [],
@@ -63,6 +57,9 @@ final class Participants
         return $this->sender instanceof Address;
     }
 
+    /**
+     * @return Address[]
+     */
     public function getFrom(): array
     {
         return $this->from;
@@ -73,6 +70,9 @@ final class Participants
         return !empty($this->from);
     }
 
+    /**
+     * @return Address[]
+     */
     public function getReplyTo(): array
     {
         return $this->replyTo;
@@ -83,6 +83,9 @@ final class Participants
         return !empty($this->replyTo);
     }
 
+    /**
+     * @return Address[]
+     */
     public function getTo(): array
     {
         return $this->to;
@@ -93,6 +96,9 @@ final class Participants
         return !empty($this->to);
     }
 
+    /**
+     * @return Address[]
+     */
     public function getCc(): array
     {
         return $this->cc;
@@ -103,6 +109,9 @@ final class Participants
         return !empty($this->cc);
     }
 
+    /**
+     * @return Address[]
+     */
     public function getBcc(): array
     {
         return $this->bcc;

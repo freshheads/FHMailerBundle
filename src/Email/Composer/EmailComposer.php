@@ -70,7 +70,7 @@ final class EmailComposer implements ComposerInterface
         }
 
         if ($participants->hasCc()) {
-            $message->cc($participants['cc']);
+            $message->cc($participants->getCc());
         }
 
         if ($participants->hasBcc()) {
