@@ -5,8 +5,7 @@ namespace FH\Bundle\MailerBundle\Composer;
 
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Exception\InvalidArgumentException;
-use Symfony\Component\Mime\RawMessage;
+use Symfony\Component\Mime\Email;
 
 final class TemplatedEmailComposer implements ComposerInterface
 {
@@ -20,15 +19,9 @@ final class TemplatedEmailComposer implements ComposerInterface
     /**
      * @return TemplatedEmail
      */
-    public function compose(array $context, RawMessage $message = null): RawMessage
+    public function compose(array $context, Email $message = null): Email
     {
         $message = $message ?: new TemplatedEmail();
-
-        if (!$message instanceof TemplatedEmail) {
-            throw new InvalidArgumentException(
-                sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class,  get_class($message))
-            );
-        }
 
         (new ApplyEmailMessageOptions())->apply($message, $this->messageOptions);
         $this->applyTemplates($context, $message);
