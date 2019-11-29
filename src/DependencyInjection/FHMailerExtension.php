@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace FH\Bundle\MailerBundle\DependencyInjection;
 
 use FH\Bundle\MailerBundle\Composer\ComposerIdentifiers;
-use FH\Bundle\MailerBundle\Composer\EmailComposer;
 use FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer;
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Config\FileLocator;
@@ -18,6 +17,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 final class FHMailerExtension extends ConfigurableExtension
 {
+    /**
+     * @throws \Exception
+     */
     public function loadInternal(array $configs, ContainerBuilder $container): void
     {
         (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')))

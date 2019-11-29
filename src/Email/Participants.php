@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace FH\Bundle\MailerBundle\Email;
 
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\NamedAddress;
 
 final class Participants
 {
@@ -124,12 +123,6 @@ final class Participants
 
     private static function createAddress(array $address): Address
     {
-        $name = $address['name'] ?? null;
-
-        if (is_string($name)) {
-            return new NamedAddress($address['address'], $address['name']);
-        }
-
-        return new Address($address['address']);
+        return new Address($address['address'], $address['name'] ?? '');
     }
 }
