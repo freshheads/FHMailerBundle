@@ -22,7 +22,7 @@ final class FHMailerExtension extends ConfigurableExtension
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
     {
-        (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')))
+        (new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config')))
             ->load('message_composer.yaml');
 
         foreach ($configs[ComposerIdentifiers::TEMPLATED_EMAIL] as $name => $messageOptions) {
@@ -32,23 +32,33 @@ final class FHMailerExtension extends ConfigurableExtension
         }
     }
 
+    /**
+     * @param ContainerInterface $container
+     * @param string $composerId
+     * @param string[] $messageOptions
+     */
     private function registerTemplatedEmailComposer(
         ContainerInterface $container,
         string $composerId,
         array $messageOptions
-    ): void
-    {
+    ): void {
         $this->registerComposer($container, $messageOptions, TemplatedEmailComposer::class, $composerId);
     }
 
+    /**
+     * @param ContainerInterface $container
+     * @param string[] $messageOptions
+     * @param string $composerClass
+     * @param string $composerId
+     * @param string|null $chainedComposerId
+     */
     private function registerComposer(
         ContainerInterface $container,
         array $messageOptions,
         string $composerClass,
         string $composerId,
         string $chainedComposerId = null
-    ): void
-    {
+    ): void {
         $optionsId = $composerId . '._message_options';
         $container->setDefinition($optionsId, $this->createMessageOptionsDefinition($messageOptions));
 
