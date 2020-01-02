@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\DependencyInjection;
 
+use Exception;
 use FH\Bundle\MailerBundle\Composer\ComposerIdentifiers;
 use FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer;
 use FH\Bundle\MailerBundle\Email\MessageOptions;
@@ -18,23 +19,25 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 final class FHMailerExtension extends ConfigurableExtension
 {
     /**
-     * @throws \Exception
+     * @param string[] $configs
+     * @throws Exception
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
     {
-        (new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config')))
-            ->load('message_composer.yaml');
+        $fileLoader = (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')));
+        $fileLoader->load('message_composer.yaml');
+        $fileLoader->load('transport.yaml');
 
         foreach ($configs[ComposerIdentifiers::TEMPLATED_EMAIL] as $name => $messageOptions) {
             $composerId = $this->createComposerId($name, ComposerIdentifiers::TEMPLATED_EMAIL);
 
             $this->registerTemplatedEmailComposer($container, $composerId, $messageOptions);
         }
+
+        $container->setParameter('env(MAILER_DSN)', $configs['dsn']);
     }
 
     /**
-     * @param ContainerInterface $container
-     * @param string $composerId
      * @param string[] $messageOptions
      */
     private function registerTemplatedEmailComposer(

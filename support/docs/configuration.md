@@ -3,6 +3,8 @@ Configuration
 
 ```
 fh_mailer:
+    dsn: 'smtpnotls://127.0.0.1'
+
     templated_email:
         consumer_welcome:
             html_template: 'email/consumer_welcome.html.twig'
