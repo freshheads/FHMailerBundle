@@ -17,7 +17,6 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder(self::CONFIG_ID);
         $rootNode = $this->getRootNode(self::CONFIG_ID, $treeBuilder);
 
-        $rootNode->children()->scalarNode('dsn')->defaultValue('smtpnotls://127.0.0.1:25')->end();
         $this->addMessageComposersNode($rootNode);
 
         return $treeBuilder;

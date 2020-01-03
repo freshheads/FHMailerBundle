@@ -1,10 +1,11 @@
 Configuration
 -------------
-
 ```
-fh_mailer:
-    dsn: 'smtpnotls://127.0.0.1'
+framework:
+    mailer:
+        dsn: 'smtpnotls://127.0.0.1'
 
+fh_mailer:
     templated_email:
         consumer_welcome:
             html_template: 'email/consumer_welcome.html.twig'

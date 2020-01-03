@@ -24,7 +24,7 @@ final class FHMailerExtension extends ConfigurableExtension
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
     {
-        $fileLoader = (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')));
+        $fileLoader = (new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config')));
         $fileLoader->load('message_composer.yaml');
         $fileLoader->load('transport.yaml');
 
@@ -33,8 +33,6 @@ final class FHMailerExtension extends ConfigurableExtension
 
             $this->registerTemplatedEmailComposer($container, $composerId, $messageOptions);
         }
-
-        $container->setParameter('env(MAILER_DSN)', $configs['dsn']);
     }
 
     /**
