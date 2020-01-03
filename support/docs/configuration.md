@@ -3,7 +3,7 @@ Configuration
 ```
 framework:
     mailer:
-        dsn: 'smtpnotls://127.0.0.1'
+        dsn: 'plainsmtp://127.0.0.1'
 
 fh_mailer:
     templated_email:

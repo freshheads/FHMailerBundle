@@ -3,6 +3,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    FH\Bundle\MailerBundle\Transport\Smtp\SmtpNoTlsTransportFactory:
+    FH\Bundle\MailerBundle\Transport\Smtp\PlainSmtpTransportFactory:
         tags:
             - { name: 'mailer.transport_factory' }

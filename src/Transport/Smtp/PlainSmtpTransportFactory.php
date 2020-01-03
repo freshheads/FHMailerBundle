@@ -9,14 +9,14 @@ use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 
-final class SmtpNoTlsTransportFactory extends AbstractTransportFactory
+final class PlainSmtpTransportFactory extends AbstractTransportFactory
 {
     /**
      * @return string[]
      */
     protected function getSupportedSchemes(): array
     {
-        return [ 'smtpnotls' ];
+        return [ 'plainsmtp' ];
     }
 
     /**
