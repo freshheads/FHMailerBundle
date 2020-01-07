@@ -10,7 +10,6 @@ use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,6 +19,7 @@ final class FHMailerExtension extends ConfigurableExtension
 {
     /**
      * @param string[] $configs
+     * @param ContainerBuilder $container
      * @throws Exception
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
@@ -36,10 +36,12 @@ final class FHMailerExtension extends ConfigurableExtension
     }
 
     /**
+     * @param ContainerBuilder $container
+     * @param string $composerId
      * @param string[] $messageOptions
      */
     private function registerTemplatedEmailComposer(
-        ContainerInterface $container,
+        ContainerBuilder $container,
         string $composerId,
         array $messageOptions
     ): void {
@@ -47,14 +49,14 @@ final class FHMailerExtension extends ConfigurableExtension
     }
 
     /**
-     * @param ContainerInterface $container
+     * @param ContainerBuilder $container
      * @param string[] $messageOptions
      * @param string $composerClass
      * @param string $composerId
      * @param string|null $chainedComposerId
      */
     private function registerComposer(
-        ContainerInterface $container,
+        ContainerBuilder $container,
         array $messageOptions,
         string $composerClass,
         string $composerId,
