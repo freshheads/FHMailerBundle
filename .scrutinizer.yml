@@ -11,6 +11,13 @@ build:
                 override:
                     - php-scrutinizer-run
                     - phpcs-run
+        coverage:
+            tests:
+                override:
+                -   command: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+                    coverage:
+                        file: coverage.xml
+                        format: clover
     dependencies:
         override:
             - composer install --no-interaction --prefer-dist
