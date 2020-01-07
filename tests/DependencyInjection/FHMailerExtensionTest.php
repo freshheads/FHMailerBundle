@@ -41,7 +41,10 @@ final class FHMailerExtensionTest extends TestCase
 
         try {
             $templatedEmailDefinition = $this->container->findDefinition('fh_mailer.composer.templated_email.to_ms_test');
-            //$templatedEmailService = $this->container->get('fh_mailer.composer.templated_email.to_ms_test');
+            $templatedEmailDefinition->setPublic(true);
+            $this->container->compile();
+
+            $templatedEmailService = $this->container->get('fh_mailer.composer.templated_email.to_ms_test');
         } catch (ServiceNotFoundException $exception) {
             $this->fail("Service 'fh_mailer.composer.templated_email.to_ms_test' is not defined");
         }
@@ -52,7 +55,7 @@ final class FHMailerExtensionTest extends TestCase
         );
 
         $this->assertCount(0, $templatedEmailDefinition->getErrors());
-        // TODO Assert instance type (TemplatedEmailComposer)
+        $this->assertInstanceOf(TemplatedEmailComposer::class, $templatedEmailService);
     }
 
     private function getTestConfig(): array
