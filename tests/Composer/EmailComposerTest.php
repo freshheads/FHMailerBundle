@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
-class EmailComposerTest extends TestCase
+final class EmailComposerTest extends TestCase
 {
     private $sender;
     private $to;

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
 
-class ApplyEmailMessageOptionsTest extends TestCase
+final class ApplyEmailMessageOptionsTest extends TestCase
 {
     private $messageOptions;
     private $applyEmailMessageOptions;

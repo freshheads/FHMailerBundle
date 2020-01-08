@@ -9,7 +9,7 @@ use Symfony\Component\Mailer\Transport\Dsn;
 use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
 
-class PlainSmtpTransportFactoryTest extends TestCase
+final class PlainSmtpTransportFactoryTest extends TestCase
 {
 
     private $factory;

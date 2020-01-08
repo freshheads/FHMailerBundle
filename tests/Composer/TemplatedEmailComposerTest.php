@@ -12,7 +12,7 @@ use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
-class TemplatedEmailComposerTest extends TestCase
+final class TemplatedEmailComposerTest extends TestCase
 {
     private $messageOptions;
     private $templatedEmailComposer;
