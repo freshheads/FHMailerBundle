@@ -40,7 +40,7 @@ class PlainSmtpTransportFactoryTest extends TestCase
      */
     public function testCreateTransportNoDefaultPort(): void
     {
-        $dsn = new Dsn('smtp', 'localhost', null, null, 30);
+        $dsn = new Dsn('', 'localhost', null, null, 30);
         $transport = $this->factory->create($dsn);
         /** @var SocketStream $stream */
         $stream = $transport->getStream();
