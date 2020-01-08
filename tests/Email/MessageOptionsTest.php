@@ -53,7 +53,7 @@ final class MessageOptionsTest extends TestCase
         ]]);
     }
 
-    public function testToArray(): void
+    public function testFromArray(): void
     {
         $this->assertTrue($this->messageOptions->hasSubject());
         $this->assertSame('Test email', $this->messageOptions->getSubject());

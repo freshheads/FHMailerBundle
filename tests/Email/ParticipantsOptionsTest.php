@@ -58,7 +58,7 @@ final class ParticipantsOptionsTest extends TestCase
         ]);
     }
 
-    public function testToArray(): void
+    public function testFromArray(): void
     {
         // Sender
         $this->assertTrue($this->participants->hasSender());
