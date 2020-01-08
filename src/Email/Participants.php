@@ -46,7 +46,7 @@ final class Participants
         $this->bcc = $bcc;
     }
 
-    public function getSender(): Address
+    public function getSender(): ?Address
     {
         return $this->sender;
     }
