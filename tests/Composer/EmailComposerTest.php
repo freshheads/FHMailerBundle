@@ -44,7 +44,7 @@ final class EmailComposerTest extends TestCase
 
     public function testReturnedMessageType(): void
     {
-        $email = $this->emailComposer->compose([]);
+        $email = $this->emailComposer->compose();
 
         $this->assertInstanceOf(Email::class, $email);
     }

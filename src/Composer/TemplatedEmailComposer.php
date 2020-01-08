@@ -20,7 +20,7 @@ final class TemplatedEmailComposer implements ComposerInterface
     /**
      * @return TemplatedEmail
      */
-    public function compose(array $context, Email $message = null): Email
+    public function compose(array $context = [], Email $message = null): Email
     {
         $message = $message ?? new TemplatedEmail();
         if (!$message instanceof TemplatedEmail) {

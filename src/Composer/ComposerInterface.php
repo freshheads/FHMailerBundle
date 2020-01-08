@@ -7,5 +7,5 @@ use Symfony\Component\Mime\Email;
 
 interface ComposerInterface
 {
-    public function compose(array $context, Email $message = null): Email;
+    public function compose(array $context = [], Email $message = null): Email;
 }

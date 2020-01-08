@@ -51,14 +51,14 @@ final class TemplatedEmailComposerTest extends TestCase
 
     public function testReturnedMessageType(): void
     {
-        $email = $this->templatedEmailComposer->compose([]);
+        $email = $this->templatedEmailComposer->compose();
 
         $this->assertInstanceOf(TemplatedEmail::class, $email);
     }
 
     public function testSelectedTemplate(): void
     {
-        $email = $this->templatedEmailComposer->compose([]);
+        $email = $this->templatedEmailComposer->compose();
 
         $this->assertSame('test.txt.twig', $email->getTextTemplate());
         $this->assertSame('test.html.twig', $email->getHtmlTemplate());

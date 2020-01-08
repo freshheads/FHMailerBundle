@@ -18,7 +18,7 @@ final class EmailComposer implements ComposerInterface
     /**
      * @return Email
      */
-    public function compose(array $context, Email $message = null): Email
+    public function compose(array $context = [], Email $message = null): Email
     {
         $message = $message ?: new Email();
 
