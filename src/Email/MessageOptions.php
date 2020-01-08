@@ -13,7 +13,7 @@ final class MessageOptions
     public static function fromArray(array $messageOptions): self
     {
         return new self(
-            $messageOptions['subject'] ?? null,
+            $messageOptions['subject'],
             $messageOptions['html_template'] ?? null,
             $messageOptions['text_template'] ?? null,
             Participants::fromArray($messageOptions['participants'])
