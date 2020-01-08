@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
 
+/**
+ * @covers \FH\Bundle\MailerBundle\Composer\ApplyEmailMessageOptions
+ */
 final class ApplyEmailMessageOptionsTest extends TestCase
 {
     private $messageOptions;
@@ -47,9 +50,6 @@ final class ApplyEmailMessageOptionsTest extends TestCase
         $this->applyEmailMessageOptions = new ApplyEmailMessageOptions();
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Composer\ApplyEmailMessageOptions
-     */
     public function testOptionsApplied(): void
     {
         $email = new TemplatedEmail();

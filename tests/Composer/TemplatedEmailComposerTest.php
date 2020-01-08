@@ -12,6 +12,9 @@ use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
+/**
+ * @covers \FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer
+ */
 final class TemplatedEmailComposerTest extends TestCase
 {
     private $messageOptions;
@@ -39,9 +42,6 @@ final class TemplatedEmailComposerTest extends TestCase
         $this->templatedEmailComposer = new TemplatedEmailComposer($this->messageOptions);
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer
-     */
     public function testWrongMessageType(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -49,9 +49,6 @@ final class TemplatedEmailComposerTest extends TestCase
         $this->templatedEmailComposer->compose([], new Email());
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer
-     */
     public function testReturnedMessageType(): void
     {
         $email = $this->templatedEmailComposer->compose([]);
@@ -59,9 +56,6 @@ final class TemplatedEmailComposerTest extends TestCase
         $this->assertInstanceOf(TemplatedEmail::class, $email);
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer
-     */
     public function testSelectedTemplate(): void
     {
         $email = $this->templatedEmailComposer->compose([]);
@@ -70,9 +64,6 @@ final class TemplatedEmailComposerTest extends TestCase
         $this->assertSame('test.html.twig', $email->getHtmlTemplate());
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer
-     */
     public function testContext(): void
     {
         $context = ['foo' => 'bar'];

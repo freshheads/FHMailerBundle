@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
+/**
+ * @covers \FH\Bundle\MailerBundle\Composer\EmailComposer
+ */
 final class EmailComposerTest extends TestCase
 {
     private $sender;
@@ -39,9 +42,6 @@ final class EmailComposerTest extends TestCase
         $this->emailComposer = new EmailComposer($this->messageOptions);
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Composer\EmailComposer
-     */
     public function testReturnedMessageType(): void
     {
         $email = $this->emailComposer->compose([]);

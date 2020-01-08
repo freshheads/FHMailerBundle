@@ -9,6 +9,9 @@ use Symfony\Component\Mailer\Transport\Dsn;
 use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
 
+/**
+ * @covers \FH\Bundle\MailerBundle\Transport\Smtp\PlainSmtpTransportFactory
+ */
 final class PlainSmtpTransportFactoryTest extends TestCase
 {
 
@@ -19,9 +22,6 @@ final class PlainSmtpTransportFactoryTest extends TestCase
         $this->factory = new PlainSmtpTransportFactory();
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Transport\Smtp\PlainSmtpTransportFactory
-     */
     public function testSupported(): void
     {
         $dsn = new Dsn('plainsmtp', 'localhost');
@@ -31,9 +31,6 @@ final class PlainSmtpTransportFactoryTest extends TestCase
         $this->assertTrue($supports);
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Transport\Smtp\PlainSmtpTransportFactory
-     */
     public function testUnsupported(): void
     {
         $dsn = new Dsn('smtp', 'localhost');
@@ -43,9 +40,6 @@ final class PlainSmtpTransportFactoryTest extends TestCase
         $this->assertFalse($supports);
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Transport\Smtp\PlainSmtpTransportFactory
-     */
     public function testCreateTransport(): void
     {
         $dsn = new Dsn('plainsmtp', 'localhost');
@@ -59,9 +53,6 @@ final class PlainSmtpTransportFactoryTest extends TestCase
         $this->assertFalse($stream->isTLS(), 'TLS should not be enabled');
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\Transport\Smtp\PlainSmtpTransportFactory
-     */
     public function testCreateTransportNoDefaultPort(): void
     {
         $dsn = new Dsn('plainsmtp', 'localhost', null, null, 30);

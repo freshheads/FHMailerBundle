@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
+/**
+ * @covers \FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension
+ */
 final class FHMailerExtensionTest extends TestCase
 {
     private $container;
@@ -21,9 +24,6 @@ final class FHMailerExtensionTest extends TestCase
         $this->extension = new FHMailerExtension();
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension
-     */
     public function testExtensionLoaded(): void
     {
         $this->extension->load([], $this->container);
@@ -32,9 +32,6 @@ final class FHMailerExtensionTest extends TestCase
         $this->assertContains(TemplatedEmailComposer::class, $this->container->getServiceIds());
     }
 
-    /**
-     * @covers \FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension
-     */
     public function testConfiguredTagsDefined(): void
     {
         $this->extension->load($this->getTestConfig(), $this->container);
