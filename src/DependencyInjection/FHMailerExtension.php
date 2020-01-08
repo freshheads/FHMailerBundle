@@ -18,8 +18,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 final class FHMailerExtension extends ConfigurableExtension
 {
     /**
-     * @param string[] $configs
-     * @param ContainerBuilder $container
      * @throws Exception
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
