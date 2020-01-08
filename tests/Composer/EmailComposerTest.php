@@ -42,17 +42,10 @@ class EmailComposerTest extends TestCase
     /**
      * @covers \FH\Bundle\MailerBundle\Composer\EmailComposer
      */
-    public function testReturnedMessage(): void
+    public function testReturnedMessageType(): void
     {
         $email = $this->emailComposer->compose([]);
 
         $this->assertInstanceOf(Email::class, $email);
-
-        $this->assertEquals($this->sender, $email->getSender());
-
-        $this->assertCount(1, $email->getTo());
-        $this->assertEquals($this->to, $email->getTo()[0]);
-
-        $this->assertEquals('Test email', $email->getSubject());
     }
 }

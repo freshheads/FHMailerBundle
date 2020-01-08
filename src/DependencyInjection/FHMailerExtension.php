@@ -5,6 +5,7 @@ namespace FH\Bundle\MailerBundle\DependencyInjection;
 
 use Exception;
 use FH\Bundle\MailerBundle\Composer\ComposerIdentifiers;
+use FH\Bundle\MailerBundle\Composer\EmailComposer;
 use FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer;
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Config\FileLocator;
@@ -31,6 +32,12 @@ final class FHMailerExtension extends ConfigurableExtension
 
             $this->registerTemplatedEmailComposer($container, $composerId, $messageOptions);
         }
+
+        foreach ($configs[ComposerIdentifiers::EMAIL] as $name => $messageOptions) {
+            $composerId = $this->createComposerId($name, ComposerIdentifiers::EMAIL);
+
+            $this->registerEmailComposer($container, $composerId, $messageOptions);
+        }
     }
 
     /**
@@ -44,6 +51,19 @@ final class FHMailerExtension extends ConfigurableExtension
         array $messageOptions
     ): void {
         $this->registerComposer($container, $messageOptions, TemplatedEmailComposer::class, $composerId);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param string $composerId
+     * @param string[] $messageOptions
+     */
+    private function registerEmailComposer(
+        ContainerBuilder $container,
+        string $composerId,
+        array $messageOptions
+    ): void {
+        $this->registerComposer($container, $messageOptions, EmailComposer::class, $composerId);
     }
 
     /**

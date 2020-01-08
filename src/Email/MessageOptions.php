@@ -13,9 +13,9 @@ final class MessageOptions
     public static function fromArray(array $messageOptions): self
     {
         return new self(
-            $messageOptions['subject'],
-            $messageOptions['html_template'],
-            $messageOptions['text_template'],
+            $messageOptions['subject'] ?? null,
+            $messageOptions['html_template'] ?? null,
+            $messageOptions['text_template'] ?? null,
             Participants::fromArray($messageOptions['participants'])
         );
     }

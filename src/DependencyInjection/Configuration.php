@@ -37,6 +37,17 @@ final class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
+                ->end()
+            ->children()
+                ->arrayNode(ComposerIdentifiers::EMAIL)
+                    ->useAttributeAsKey('identifier')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('subject')->defaultNull()->end()
+                                ->append($this->getParticipantsNode())
+                            ->end()
+                        ->end()
+                    ->end()
                 ->end();
     }
 
