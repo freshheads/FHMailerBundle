@@ -51,24 +51,18 @@ final class FHMailerExtension extends ConfigurableExtension
      * @param string[] $messageOptions
      * @param string $composerClass
      * @param string $composerId
-     * @param string|null $chainedComposerId
      */
     private function registerComposer(
         ContainerBuilder $container,
         array $messageOptions,
         string $composerClass,
-        string $composerId,
-        string $chainedComposerId = null
+        string $composerId
     ): void {
         $optionsId = $composerId . '._message_options';
         $container->setDefinition($optionsId, $this->createMessageOptionsDefinition($messageOptions));
 
         $composerDefinition = new ChildDefinition($composerClass);
         $composerDefinition->setArgument('$messageOptions', new Reference($optionsId));
-
-        if (is_string($chainedComposerId)) {
-            $composerDefinition->setArgument('$composer', new Reference($chainedComposerId));
-        }
 
         $container->setDefinition($composerId, $composerDefinition);
     }
