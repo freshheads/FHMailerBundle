@@ -6,9 +6,6 @@ namespace FH\Bundle\MailerBundle\Composer;
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Mime\Email;
 
-/**
- * @TODO to implement (or delete)
- */
 final class EmailComposer implements ComposerInterface
 {
     private $messageOptions;
