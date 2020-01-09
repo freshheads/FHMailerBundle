@@ -15,5 +15,5 @@ Documentation
 -------------
 - [Installation](support/docs/installation.md)
 - [Usage](support/docs/usage.md)
-- [Custom transport](support/docs/transport.md)
+- [Plain SMTP transport](support/docs/transport.md)
 - [Full configuration](support/docs/configuration.md)

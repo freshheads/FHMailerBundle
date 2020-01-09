@@ -1,10 +1,9 @@
 Full configuration
 -------------
-Need to know how to use the transport? [take a look here](transport.md).
-The 'how to send a email' [can be found here](usage.md).
+This bundle contains a plain SMTP transport factory for the Symfony Mailer component, [take a look at the transport documentation](transport.md).
+For the 'how to send a email' [go to the usage documentation](usage.md).
 
 ```
-# Don't use this unles you need to, see the transport docs.
 framework:
     mailer:
         dsn: 'plainsmtp://127.0.0.1'
