@@ -4,10 +4,6 @@ This bundle contains a plain SMTP transport factory for the Symfony Mailer compo
 For the 'how to send a email' [go to the usage documentation](usage.md).
 
 ```
-framework:
-    mailer:
-        dsn: 'plainsmtp://127.0.0.1'
-
 fh_mailer:
     # All available options for templated emails
     templated_email:
