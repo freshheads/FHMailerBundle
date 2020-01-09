@@ -12,17 +12,32 @@ fh_mailer:
             text_template: 'email/consumer_welcome.txt.twig'
             subject: 'Tilburg, je bent er.'
             participants:
-                sender: [ address: 'freshheads@example.com', name: 'Freshheads' ]
+                sender: { address: 'freshheads@example.com', name: 'Freshheads' }
                 from:
-                    - [ address: 'kevin@example.com', name: 'Kevin' ]
+                    - { address: 'kevin@example.com', name: 'Kevin' }
                 reply_to:
-                    - [ address: 'freshheads@example.com', name: 'Freshheads' ]
+                    - { address: 'freshheads@example.com', name: 'Freshheads' }
                 to:
-                    - [ address: 'misha@example.com', name: 'Misha' ]
+                    - { address: 'misha@example.com', name: 'Misha' }
                 cc:
-                    - [ address: 'joris@example.com', name: 'Joris' ]
+                    - { address: 'joris@example.com', name: 'Joris' }
                 bcc:
-                    - [ address: 'bart@example.com', name: 'Bart' ]          
+                    - { address: 'bart@example.com', name: 'Bart' }
+    email:
+        consumer_welcome:
+            subject: 'Tilburg, je bent er.'
+            participants:
+                sender: { address: 'freshheads@example.com', name: 'Freshheads' }
+                from:
+                    - { address: 'kevin@example.com', name: 'Kevin' }
+                reply_to:
+                    - { address: 'freshheads@example.com', name: 'Freshheads' }
+                to:
+                    - { address: 'misha@example.com', name: 'Misha' }
+                cc:
+                    - { address: 'joris@example.com', name: 'Joris' }
+                bcc:
+                    - { address: 'bart@example.com', name: 'Bart' }
 ```
 
 To quote Symfony's documentation:
