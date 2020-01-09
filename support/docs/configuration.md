@@ -1,6 +1,5 @@
 Full configuration
 -------------
-This bundle contains a plain SMTP transport factory for the Symfony Mailer component, [take a look at the transport documentation](transport.md).
 For the 'how to send a email' [go to the usage documentation](usage.md).
 
 ```
@@ -41,3 +40,5 @@ fh_mailer:
                 bcc:
                     - { address: 'bart@example.com', name: 'Bart' }
 ```
+
+This bundle contains a plain SMTP transport factory for the Symfony Mailer component, [take a look at the transport documentation](transport.md).
