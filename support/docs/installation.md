@@ -17,4 +17,4 @@ return [
 ];
 ```
 
-Now the bundle is ready to be [configured](configuration.md)!
+Now the bundle is ready to be [used](usage.md)!

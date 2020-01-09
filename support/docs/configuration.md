@@ -1,11 +1,16 @@
-Configuration
+Full configuration
 -------------
+Need to know how to use the transport? [take a look here](transport.md).
+The 'how to send a email' [can be found here](usage.md).
+
 ```
+# Don't use this unles you need to, see the transport docs.
 framework:
     mailer:
         dsn: 'plainsmtp://127.0.0.1'
 
 fh_mailer:
+    # All available options for templated emails
     templated_email:
         consumer_welcome:
             html_template: 'email/consumer_welcome.html.twig'
@@ -23,6 +28,8 @@ fh_mailer:
                     - { address: 'joris@example.com', name: 'Joris' }
                 bcc:
                     - { address: 'bart@example.com', name: 'Bart' }
+    
+    # All available options for regular emails
     email:
         consumer_welcome:
             subject: 'Tilburg, je bent er.'
@@ -39,10 +46,3 @@ fh_mailer:
                 bcc:
                     - { address: 'bart@example.com', name: 'Bart' }
 ```
-
-To quote Symfony's documentation:
-> Symfony's Mailer & Mime components form a powerful system for creating and sending emails - complete with support for multipart messages, Twig integration, CSS inlining, file attachments and a lot more.
-
-Go have a look at the documentation for information on how to configure any of the mentioned features (and more!): https://symfony.com/doc/current/mailer.html
-
-Now the bundle is ready to be [used](usage.md)!
