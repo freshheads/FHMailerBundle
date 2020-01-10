@@ -1,10 +1,13 @@
 {
     "name": "freshheads/mailer-bundle",
-    "description": "This bundle sends e-mails with the symfony mailer.",
+    "description": "This bundle makes it easy to compose email messages for the symfony mailer.",
     "type": "symfony-bundle",
     "keywords": [
+        "email",
         "mail",
-        "mailer"
+        "mailer",
+        "twig",
+        "template"
     ],
     "license": "MIT",
     "authors": [
