@@ -1,6 +1,6 @@
 Usage
 ------------
-Just like the Symfony mailer component we both support (twig) templated emails en plain email.
+Just like the Symfony mailer component we both support (Twig) templated and plain e-mails.
 
 # Templated emails
 For templated emails you use the `TemplatedEmailComposer`.
