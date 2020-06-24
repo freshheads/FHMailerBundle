@@ -1,5 +1,10 @@
 build:
     nodes:
+        tests: # disables default
+            tests:
+                override:
+                    - true
+
         analysis:
             environment:
                 php:
