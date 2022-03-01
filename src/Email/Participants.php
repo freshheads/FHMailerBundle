@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
 
-use FH\Bundle\MailerBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Address;
 
 final class Participants
@@ -29,9 +28,7 @@ final class Participants
 
     public static function fromArray(array $participants): self
     {
-        $createAddress = static function (array $address) {
-            return self::createAddress($address);
-        };
+        $createAddress = static fn (array $address) => self::createAddress($address);
 
         return new self(
             isset($participants['sender']) && \is_array($participants['sender']) ? self::createAddress($participants['sender']) : null,

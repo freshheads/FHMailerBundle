@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
 
-use FH\Bundle\MailerBundle\Exception\InvalidArgumentException;
-
 final class MessageOptions
 {
     /** @var string|null */

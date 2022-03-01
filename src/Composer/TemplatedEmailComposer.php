@@ -24,7 +24,7 @@ final class TemplatedEmailComposer implements ComposerInterface
      */
     public function compose(array $context = [], Email $message = null): Email
     {
-        $message = $message ?? new TemplatedEmail();
+        $message ??= new TemplatedEmail();
         if (!$message instanceof TemplatedEmail) {
             throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class, \get_class($message)));
         }
