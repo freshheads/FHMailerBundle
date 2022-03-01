@@ -6,6 +6,7 @@ namespace FH\Bundle\MailerBundle\Composer;
 
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use FH\Bundle\MailerBundle\Email\Participants;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
 final class ApplyEmailMessageOptions
@@ -21,8 +22,8 @@ final class ApplyEmailMessageOptions
 
     private function applyParticipants(Email $email, Participants $participants): void
     {
-        if ($participants->hasSender()) {
-            $email->sender($participants->getSender());
+        if (($sender = $participants->getSender()) instanceof Address) {
+            $email->sender($sender);
         }
 
         if ($participants->hasFrom()) {

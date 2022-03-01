@@ -6,14 +6,14 @@ namespace FH\Bundle\MailerBundle\Tests\Email;
 
 use FH\Bundle\MailerBundle\Email\Participants;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Mime\Address;
 
 /**
  * @covers \FH\Bundle\MailerBundle\Email\Participants
  */
 final class ParticipantsOptionsTest extends TestCase
 {
-    /** @var Participants */
-    private $participants;
+    private Participants $participants;
 
     protected function setUp(): void
     {
@@ -61,10 +61,11 @@ final class ParticipantsOptionsTest extends TestCase
 
     public function testFromArray(): void
     {
-        // Sender
+        $sender = $this->participants->getSender();
+        $this->assertInstanceOf(Address::class, $sender);
         $this->assertTrue($this->participants->hasSender());
-        $this->assertSame('Mr. Test', $this->participants->getSender()->getName());
-        $this->assertSame('noreply@freshheads.com', $this->participants->getSender()->getAddress());
+        $this->assertSame('Mr. Test', $sender->getName());
+        $this->assertSame('noreply@freshheads.com', $sender->getAddress());
 
         // From
         $this->assertTrue($this->participants->hasFrom());

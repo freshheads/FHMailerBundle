@@ -31,17 +31,17 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
-        "symfony/config": "^4.4|^5.0",
-        "symfony/console": "^4.4|^5.0",
-        "symfony/dependency-injection": "^4.4|^5.0",
-        "symfony/http-kernel": "^4.4|^5.0",
-        "symfony/mailer": "^4.4|^5.0",
-        "symfony/twig-bridge": "^4.4|^5.0",
-        "symfony/yaml": "^4.4|^5.0"
+        "php": ">=7.4",
+        "symfony/config": "^5.4 | ^6.0",
+        "symfony/console": "^5.4 | ^6.0",
+        "symfony/dependency-injection": "^5.4 | ^6.0",
+        "symfony/http-kernel": "^5.4 | ^6.0",
+        "symfony/mailer": "^5.4 | ^6.0",
+        "symfony/twig-bridge": "^5.4 | ^6.0",
+        "symfony/yaml": "^5.4 | ^6.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.4|^5.0"
+        "symfony/phpunit-bridge": "^5.4 | ^6.0"
     },
     "config": {
         "sort-packages": true
@@ -56,7 +56,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "1.x-dev"
+            "dev-develop": "2.x-dev"
         }
     },
     "scripts": {
