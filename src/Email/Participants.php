@@ -8,23 +8,12 @@ use Symfony\Component\Mime\Address;
 
 final class Participants
 {
-    /** @var Address|null */
-    private $sender;
-
-    /** @var array */
-    private $from;
-
-    /** @var array */
-    private $replyTo;
-
-    /** @var array */
-    private $to;
-
-    /** @var array */
-    private $cc;
-
-    /** @var array */
-    private $bcc;
+    private ?Address $sender;
+    private array $from;
+    private array $replyTo;
+    private array $to;
+    private array $cc;
+    private array $bcc;
 
     public static function fromArray(array $participants): self
     {

@@ -6,17 +6,10 @@ namespace FH\Bundle\MailerBundle\Email;
 
 final class MessageOptions
 {
-    /** @var string|null */
-    private $subject;
-
-    /** @var string|null */
-    private $htmlTemplate;
-
-    /** @var string|null */
-    private $textTemplate;
-
-    /** @var Participants */
-    private $participants;
+    private ?string  $subject;
+    private ?string $htmlTemplate;
+    private ?string $textTemplate;
+    private Participants $participants;
 
     public static function fromArray(array $messageOptions): self
     {

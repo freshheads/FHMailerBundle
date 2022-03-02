@@ -8,7 +8,6 @@ use Symfony\Component\Mailer\Transport\AbstractTransportFactory;
 use Symfony\Component\Mailer\Transport\Dsn;
 use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
-use Symfony\Component\Mailer\Transport\TransportInterface;
 
 final class PlainSmtpTransportFactory extends AbstractTransportFactory
 {
@@ -20,10 +19,7 @@ final class PlainSmtpTransportFactory extends AbstractTransportFactory
         return ['plainsmtp'];
     }
 
-    /**
-     * @return SmtpTransport
-     */
-    public function create(Dsn $dsn): TransportInterface
+    public function create(Dsn $dsn): SmtpTransport
     {
         $stream = new SocketStream();
         $stream->disableTls();

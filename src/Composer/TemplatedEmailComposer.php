@@ -11,8 +11,7 @@ use Symfony\Component\Mime\Email;
 
 final class TemplatedEmailComposer implements ComposerInterface
 {
-    /** @var MessageOptions */
-    private $messageOptions;
+    private MessageOptions $messageOptions;
 
     public function __construct(MessageOptions $messageOptions)
     {
