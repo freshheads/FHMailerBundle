@@ -1,7 +1,6 @@
 {
     "require": {
         "phpstan/phpstan": "^1.4",
-        "phpstan/phpstan-doctrine": "^1.2",
         "phpstan/phpstan-phpunit": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
         "phpstan/phpstan-beberlei-assert": "^1.0"
