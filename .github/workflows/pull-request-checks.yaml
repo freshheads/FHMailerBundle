@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.3', '7.4']
+        php: ['7.4', '8.1']
     steps:
       # Checkout & installation
       - name: Checkout repository
@@ -30,12 +30,13 @@ jobs:
       - name: Run Composer linter
         run: composer validate --strict --no-check-lock
 
-      - name: Run phpstan
-        run: composer run-script phpstan
-
       - name: Run lint PHP
         run: composer run-script php-lint
 
       # Tests
       - name: Run PHP unit test suite
         run: composer run-script test
+
+      # Static analysis
+      - name: Run phpstan
+        run: composer run-script phpstan
