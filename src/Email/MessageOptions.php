@@ -42,8 +42,12 @@ final class MessageOptions
         $this->participants = $participants;
     }
 
-    public function getSubject(): ?string
+    public function getSubject(): string
     {
+        if (!\is_string($this->subject)) {
+            throw new InvalidArgumentException('Invalid subject');
+        }
+
         return $this->subject;
     }
 

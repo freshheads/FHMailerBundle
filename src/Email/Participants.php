@@ -59,8 +59,12 @@ final class Participants
         $this->bcc = $bcc;
     }
 
-    public function getSender(): ?Address
+    public function getSender(): Address
     {
+        if (!$this->sender instanceof Address) {
+            throw new InvalidArgumentException('Invalid sender');
+        }
+
         return $this->sender;
     }
 
