@@ -6,7 +6,7 @@ namespace FH\Bundle\MailerBundle\Email;
 
 final class MessageOptions
 {
-    private ?string  $subject;
+    private ?string $subject;
     private ?string $htmlTemplate;
     private ?string $textTemplate;
     private Participants $participants;
