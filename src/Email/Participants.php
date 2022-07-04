@@ -4,34 +4,20 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
 
-use FH\Bundle\MailerBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Address;
 
 final class Participants
 {
-    /** @var Address|null */
-    private $sender;
-
-    /** @var array */
-    private $from;
-
-    /** @var array */
-    private $replyTo;
-
-    /** @var array */
-    private $to;
-
-    /** @var array */
-    private $cc;
-
-    /** @var array */
-    private $bcc;
+    private ?Address $sender;
+    private array $from;
+    private array $replyTo;
+    private array $to;
+    private array $cc;
+    private array $bcc;
 
     public static function fromArray(array $participants): self
     {
-        $createAddress = static function (array $address) {
-            return self::createAddress($address);
-        };
+        $createAddress = static fn (array $address) => self::createAddress($address);
 
         return new self(
             isset($participants['sender']) && \is_array($participants['sender']) ? self::createAddress($participants['sender']) : null,

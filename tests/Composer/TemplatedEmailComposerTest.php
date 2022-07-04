@@ -18,11 +18,8 @@ use Symfony\Component\Mime\Email;
  */
 final class TemplatedEmailComposerTest extends TestCase
 {
-    /** @var MessageOptions */
-    private $messageOptions;
-
-    /** @var TemplatedEmailComposer */
-    private $templatedEmailComposer;
+    private MessageOptions $messageOptions;
+    private TemplatedEmailComposer $templatedEmailComposer;
 
     protected function setUp(): void
     {

@@ -10,17 +10,15 @@ use FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @covers \FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension
  */
 final class FHMailerExtensionTest extends TestCase
 {
-    /** @var ContainerBuilder */
-    private $container;
-
-    /** @var FHMailerExtension */
-    private $extension;
+    private ContainerBuilder $container;
+    private FHMailerExtension $extension;
 
     protected function setUp(): void
     {
@@ -61,14 +59,13 @@ final class FHMailerExtensionTest extends TestCase
         $this->assertCount(0, $emailDefinition->getErrors());
         $this->assertInstanceOf(EmailComposer::class, $emailService);
 
-        $this->assertSame(
-            (string) $templatedEmailDefinition->getArgument('$messageOptions'),
-            'fh_mailer.composer.templated_email.to_ms_test._message_options'
-        );
-        $this->assertSame(
-            (string) $emailDefinition->getArgument('$messageOptions'),
-            'fh_mailer.composer.email.to_ms_test._message_options'
-        );
+        $messageOptions = $emailDefinition->getArgument('$messageOptions');
+        $this->assertInstanceOf(Reference::class, $messageOptions);
+        $this->assertSame((string) $messageOptions, 'fh_mailer.composer.email.to_ms_test._message_options');
+
+        $messageOptions = $templatedEmailDefinition->getArgument('$messageOptions');
+        $this->assertInstanceOf(Reference::class, $messageOptions);
+        $this->assertSame((string) $messageOptions, 'fh_mailer.composer.templated_email.to_ms_test._message_options');
     }
 
     private function getTestConfig(): array

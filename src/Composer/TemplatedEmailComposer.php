@@ -11,8 +11,7 @@ use Symfony\Component\Mime\Email;
 
 final class TemplatedEmailComposer implements ComposerInterface
 {
-    /** @var MessageOptions */
-    private $messageOptions;
+    private MessageOptions $messageOptions;
 
     public function __construct(MessageOptions $messageOptions)
     {
@@ -24,7 +23,7 @@ final class TemplatedEmailComposer implements ComposerInterface
      */
     public function compose(array $context = [], Email $message = null): Email
     {
-        $message = $message ?? new TemplatedEmail();
+        $message ??= new TemplatedEmail();
         if (!$message instanceof TemplatedEmail) {
             throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class, \get_class($message)));
         }

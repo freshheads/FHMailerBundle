@@ -16,14 +16,9 @@ use Symfony\Component\Mime\Address;
  */
 final class ApplyEmailMessageOptionsTest extends TestCase
 {
-    /** @var MessageOptions */
-    private $messageOptions;
-
-    /** @var ApplyEmailMessageOptions */
-    private $applyEmailMessageOptions;
-
-    /** @var TemplatedEmail */
-    private $assertEmail;
+    private MessageOptions $messageOptions;
+    private ApplyEmailMessageOptions $applyEmailMessageOptions;
+    private TemplatedEmail $assertEmail;
 
     protected function setUp(): void
     {

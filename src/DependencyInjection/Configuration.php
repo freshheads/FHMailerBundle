@@ -25,7 +25,6 @@ final class Configuration implements ConfigurationInterface
 
     private function addMessageComposersNode(ArrayNodeDefinition $node): void
     {
-        /* @phpstan-ignore-next-line */
         $node
             ->children()
                 ->arrayNode(ComposerIdentifiers::TEMPLATED_EMAIL)
@@ -75,7 +74,6 @@ final class Configuration implements ConfigurationInterface
         $node = $this->getRootNode($rootName);
 
         if ($multiple) {
-            /* @phpstan-ignore-next-line */
             $node
                 ->prototype('array')
                     ->children()
@@ -84,7 +82,6 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                 ->end();
         } else {
-            /* @phpstan-ignore-next-line */
             $node
                 ->children()
                     ->scalarNode('address')->isRequired()->end()
